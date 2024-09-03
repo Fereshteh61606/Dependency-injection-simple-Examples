@@ -13,3 +13,13 @@ Create a simple notification system that can send messages via different channel
 
 5.In the main function, demonstrate the use of NotificationService with both EmailChannel and SMSChannel.
 
+## Task2: Payment Processing System
+Create a simple payment processing system that can handle payments through different methods (e.g., Credit Card and PayPal). Use dependency injection to allow the payment processor to work with any payment method without hardcoding the method type.
+
+### Requirements:
+
+1. Define an interface IPaymentMethod with a method processPayment(double amount).
+Implement two classes: CreditCardPayment and PayPalPayment that inherit from IPaymentMethod.
+2. Create a PaymentProcessor class that takes an IPaymentMethod object through its constructor.
+3. The PaymentProcessor should have a method makePayment(double amount) that uses the injected payment method to process the payment.
+4. In the main function, demonstrate the use of PaymentProcessor with both CreditCardPayment and PayPalPayment.
