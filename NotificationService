@@ -1,0 +1,51 @@
+#include <iostream>  
+#include <string>  
+
+// Step 1: Define the interface  
+class INotificationChannel {  
+public:  
+    virtual void sendMessage(const std::string& message) = 0;  
+    virtual ~INotificationChannel() = default;  
+};  
+
+// Step 2: Implement EmailChannel  
+class EmailChannel : public INotificationChannel {  
+public:  
+    void sendMessage(const std::string& message) override {  
+        std::cout << "Sending Email: " << message << std::endl;  
+    }  
+};  
+
+// Step 2: Implement SMSChannel  
+class SMSChannel : public INotificationChannel {  
+public:  
+    void sendMessage(const std::string& message) override {  
+        std::cout << "Sending SMS: " << message << std::endl;  
+    }  
+};  
+
+// Step 3: Create NotificationService  
+class NotificationService {  
+private:  
+    INotificationChannel* channel;  
+public:  
+    NotificationService(INotificationChannel* channel) : channel(channel) {}  
+    
+    void notify(const std::string& message) {  
+        channel->sendMessage(message);  
+    }  
+};  
+
+// Step 4: Main function  
+int main() {  
+    EmailChannel email;  
+    SMSChannel sms;  
+
+    NotificationService emailService(&email);  
+    NotificationService smsService(&sms);  
+
+    emailService.notify("Hello via Email!");  
+    smsService.notify("Hello via SMS!");  
+
+    return 0;  
+}
