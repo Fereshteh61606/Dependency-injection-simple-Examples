@@ -1,0 +1,52 @@
+
+#include <iostream>
+#include <string>
+
+class IPaymentMethod{
+	public:
+	virtual void processPayment(double amount)=0;
+};
+
+
+class CreditCardPayment: public IPaymentMethod{
+
+public:
+	void processPayment(double amount) override {
+		std::cout<<" you have used your credit card to pay this amount of money: " << amount <<std::endl;
+
+	}
+};
+
+class 	PayPalPayment: public IPaymentMethod{
+public:
+	void processPayment(double amount) override {
+			std::cout<<" you have used your paypal to pay this amount of money: " << amount <<std::endl;
+
+		}
+};
+
+class PaymentProcessor {
+private:
+	IPaymentMethod* mymethode;
+public:
+	PaymentProcessor(IPaymentMethod* methodepram): mymethode(methodepram){};
+	void makePayment(double amount){
+		mymethode->processPayment(amount);
+	}
+};
+
+int main(){
+
+	CreditCardPayment credit;
+	PayPalPayment paypal;
+
+	PaymentProcessor process(&credit);
+	credit.processPayment(200.5);
+
+	paypal.processPayment(50000);
+
+return 0;
+
+}
+
+
